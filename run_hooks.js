@@ -3,8 +3,6 @@ var fs       = require('fs'),
     redis    = require('redis'),
     connect  = require('connect'),
     quip     = require('quip'),
-    rb       = require('rbytes'),
-    md       = require('node-markdown').Markdown,
     http     = require('http'),
     url      = require('url');
 
@@ -21,8 +19,6 @@ merge = function(a, b){
 
 var libs = {
 	redis    : client,
-	rb       : rb,
-	md       : md,
 	fs       : fs,
 	doc_root : doc_root,
 	merge    : merge,
@@ -59,6 +55,7 @@ run_hooks = function (err, files) {
 		if(files[i].match(/\.js$/))
 			require('./hooks/'+files[i]).init(app);
 	}
+	app.use(null_end());
 	server_start(app);
 }
 fs.readdir("hooks", run_hooks);

@@ -1,0 +1,36 @@
+#!/usr/bin/perl
+use strict;
+print STDERR "@ARGV\n";
+if($ARGV[0] ne 'refs/heads/master'){
+	exit(0);
+}
+my @revs = `git rev-list ^$ARGV[1] $ARGV[2]`;
+my $ii;
+for $ii (reverse (0..$#revs)){
+	chomp $revs[$ii];
+	print STDERR "Updating to $revs[$ii]\n";
+	open DL, "git diff --name-status --diff-filter=D $revs[$ii]^ $revs[$ii] |";
+	while(<DL>){
+		print STDERR "$_\n";
+		if($_ =~ m/^D\s*(.*)$/){
+			my $file_name = $1;
+			print STDERR "Now deleting file $file_name\n";
+			`git checkout -f $revs[$ii]^ $file_name`;
+			`node ~/node/d_hook.js $file_name`;
+			`rm $file_name`;
+		}
+	}
+	close DL;
+	open AML, "git diff --name-status --diff-filter=AM $revs[$ii]^ $revs[$ii] |";
+	while(<AML>){
+		print STDERR "$_\n";
+		if($_ =~ m/^(A|M)\s*(.*)$/){
+			my $file_name = $2;
+			print STDERR "Now updating file $file_name\n";
+			`git checkout -f $revs[$ii] $file_name`;
+			`node ~/node/am_hook.js $file_name`;
+			`rm $file_name`;
+		}
+	}
+	close AML;
+}
