@@ -1,0 +1,21 @@
+<div class="post_block float_clear" id="<%= post_id %>">
+	<h2 class="post_title" id="pt_<%= post_id %>">
+		<a href="#post-<%= post_id %>"><%= title %></a>
+	</h1>
+	<div class="post_date">data_here</div>
+	<div class="post_snippet" id="ps_<%= post_id %>">
+		<%= snippet %>
+	</div>
+	<div class="post_block_bottom" id="pbb_<%= post_id %>">
+		<div class="post_category" id="pc_<%= post_id %>">
+			Category<br><a href="#category-<%= category%>"><%= category %></a>
+		</div>
+		<div class="post_tags" id="pt_<%= post_id %>">
+			Tags<br>
+			<% for (i in tags) { %>
+				<a href="#tag-<%= tags[i] %>"><%= tags[i] %></a>
+			<% } %>
+		</div>
+		<div class="post_comment">Comments<br></div>
+	</div>
+</div>
