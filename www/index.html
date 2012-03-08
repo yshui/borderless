@@ -10,17 +10,27 @@
 	<script src="main.js"></script>
     </head>
     <body>
-	<div class="toolbar">
-	<div class="buttons">
-	    <table>
+	<div class="topbar">
+	    <table class="buttons">
 		<tr>
-		    <th><img class="button_img" src="feed-icon.png" /></th>
+		    <td class="home_button">
+			<a href="#">Home</a>
+		    </td>
+		    <td class="category_button">Category:<div class="category_indicator">---</div>
+		    </td>
+		    <td class="tag_button">Tag:	<div class="tag_indicator">---</div>
+		    </td>
+		    <td class="tips">这是一个测试…………</td>
 		</tr>
 	    </table>
+	    <img class="feed_button_img" src="feed-icon.png" /></td>
 	</div>
-    	</div>
 	<div class="main_frame" id="main_frame">
 	    <div class="post_list" id="post_list"></div>
+	    <div class="loading_ani">
+		<img src="/loading.gif" />
+		<h2>Loading...</h2>
+	    </div>
 	    <div class="load_indicator" id="load_indicator"></div>
 	</div>
     </body>
