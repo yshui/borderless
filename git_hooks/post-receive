@@ -48,8 +48,10 @@ for $ii (reverse (0..$#revs)){
 			}
 			$time = `git log --format=%at -1 $revs[$ii]`;
 			chomp $time;
+			$author = `git log --format=%an -1 $revs[$ii]`;
+			chomp $author;
 			print STDERR "Now updating file $file_name\n";
-			`node ~/node/am_hook.js $file_name $time`;
+			`node ~/node/am_hook.js $file_name $time $author`;
 			unlink $file_name;
 		}
 	}

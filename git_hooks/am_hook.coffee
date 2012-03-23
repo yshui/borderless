@@ -1,5 +1,6 @@
 filename = process.argv[2]
 time = parseInt("#{process.argv[3]}000")
+author = process.argv[4]
 doc_root = "."
 fs = require 'fs'
 filecontent = fs.readFileSync(filename, 'utf8')
@@ -7,6 +8,7 @@ metadata = JSON.parse(filecontent.split('\n')[0])
 metadata.post_id = filename
 metadata.create_time = if time isnt "000" then new Date(time) else new Date
 metadata.modify_time = metadata.create_time
+metadata.author = author
 if !metadata.tags
 	metadata.tags = []
 if !metadata.tags.length
