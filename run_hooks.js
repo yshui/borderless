@@ -4,7 +4,8 @@ var fs       = require('fs'),
     connect  = require('connect'),
     quip     = require('quip'),
     http     = require('http'),
-    url      = require('url');
+    url      = require('url'),
+    rss      = require('rss');
 
 var client = redis.createClient();
 var doc_root = '/var/shui/www/';
@@ -22,7 +23,8 @@ var libs = {
 	fs       : fs,
 	doc_root : doc_root,
 	merge    : merge,
-	url      : url
+	url      : url,
+	rss      : rss
 }
 client.on('error', function (err) {
 	console.log("Redis error: " + err);
